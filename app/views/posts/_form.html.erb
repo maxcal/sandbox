@@ -1,0 +1,40 @@
+<%
+   @post.body ||= %Q{
+--Lorem ipsum-- dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+--Dolore-- magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+--Duis aute-- irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    }
+%>
+
+
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </div>
+
+  <fieldset>
+    <legend>Labels</legend>
+    <div class="field" id="post_labels">
+    <% @post.labels.each_with_index do |label, i| %>
+      <%= text_field_tag("post[labels][#{i}]", label) %>
+    <% end %>
+    </div>
+  </fieldset>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
