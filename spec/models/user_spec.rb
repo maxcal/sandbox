@@ -20,11 +20,16 @@ RSpec.describe User, type: :model do
     expect(user.errors.messages).to have_key :organization
   end
 
+  it 'allows an user type 1 with an org' do
+    user = User.new(valid_attributes.merge(usertype: 2))
+    user.organization = Organization.create(name: 'M & M Enterprises')
+    user.valid?
+    expect(user.errors.messages).to have_key :organization
+  end
+
   it 'does not validate the presence of org. if the usertype is 1' do
     user = User.new(valid_attributes.merge(usertype: 1))
     user.valid?
     expect(user.errors.messages).to_not have_key :organization
   end
-
-
 end
