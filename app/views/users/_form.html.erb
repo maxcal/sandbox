@@ -1,0 +1,29 @@
+<%= form_for(@user) do |f| %>
+  <div class="form-inputs">
+
+    <div class="row">
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+    </div>
+    <div class="row">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+
+    <fieldset>
+      <legend>Roles</legend>
+
+      <%= f.fields_for(:roles) do |r| %>
+        <%= r.hidden_field :name %>
+        <%= r.label :_keep do %>
+          <%= r.check_box :_keep, checked: r.object.persisted? %>
+          <%= r.object.name %>
+        <% end %>
+      <% end %>
+    </fieldset>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
