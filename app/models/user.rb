@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   end
 
   def spouse
+    return nil unless current_marriage
     current_marriage
       .users.where.not('marriages_users.user_id' => id).first
   end
