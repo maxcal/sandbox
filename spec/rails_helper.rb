@@ -35,6 +35,9 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  config.include Warden::Test::Helpers
+  config.include Devise::TestHelpers, type: :controller
+
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation, pre_count: true)
     DatabaseCleaner.strategy = :truncation
@@ -47,6 +50,7 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+    Warden.test_reset!
   end
 
   # RSpec Rails can automatically mix in different behaviours to your tests
