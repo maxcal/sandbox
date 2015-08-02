@@ -5,6 +5,12 @@ RSpec.describe Foo, type: :model do
   let(:foo) { build(:foo) }
   it { should validate_presence_of :state }
 
+  it 'validates the associated state' do
+    foo.state.state_code = 'XYZ'
+    foo.valid?
+    expect(foo.errors).to have_key :state
+  end
+
   describe '#state_code' do
     it 'returns the state code' do
       expect(foo.state_code).to eq 'AZ'
