@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name of activity:</strong>
+  <%= @scoreboard.name_of_activity %>
+</p>
+
+<p>
+  <strong>Name of scoreboard:</strong>
+  <%= @scoreboard.name_of_scoreboard %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @scoreboard.user %>
+</p>
+
+<%= link_to 'Edit', edit_scoreboard_path(@scoreboard) %> |
+<%= link_to 'Back', scoreboards_path %>
