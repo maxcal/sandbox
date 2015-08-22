@@ -1,9 +1,13 @@
 class TeamsController < ApplicationController
+
+
+  before_action :set_scoreboard, only: [:new, :create]
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
   # GET /teams
   def index
-    @teams = Team.all
+    @scoreboard = Scoreboard.eager_load(:teams).find(params[:scoreboard_id])
+    @teams = @scoreboard.teams
   end
 
   # GET /teams/1
@@ -12,7 +16,7 @@ class TeamsController < ApplicationController
 
   # GET /teams/new
   def new
-    @team = Team.new
+    @team = @scoreboard.teams.new
   end
 
   # GET /teams/1/edit
@@ -21,7 +25,7 @@ class TeamsController < ApplicationController
 
   # POST /teams
   def create
-    @team = Team.new(team_params)
+    @team = @scoreboard.teams.new(team_params)
 
     if @team.save
       redirect_to @team, notice: 'Team was successfully created.'
@@ -49,6 +53,10 @@ class TeamsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_team
       @team = Team.find(params[:id])
+    end
+
+    def set_scoreboard
+      @scoreboard = Scoreboard.find(params[:scoreboard_id])
     end
 
     # Only allow a trusted parameter "white list" through.

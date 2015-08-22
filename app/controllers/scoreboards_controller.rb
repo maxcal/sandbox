@@ -8,6 +8,7 @@ class ScoreboardsController < ApplicationController
 
   # GET /scoreboards/1
   def show
+    @team = @scoreboard.teams.build
   end
 
   # GET /scoreboards/new

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :teams
-  resources :scoreboards
+  
+  resources :scoreboards do
+    resources :teams, shallow: true
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

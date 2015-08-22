@@ -10,10 +10,7 @@
   <%= @scoreboard.name_of_scoreboard %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @scoreboard.user %>
-</p>
+<%= render partial: 'teams/form' %>
 
 <%= link_to 'Edit', edit_scoreboard_path(@scoreboard) %> |
 <%= link_to 'Back', scoreboards_path %>
