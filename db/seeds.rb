@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+10.times do
+  child = Child.create(parent: Parent.create)
+  child.skills << Skill.new( skill_type: ['stealth', 'acrobatics', 'block'].sample )
+  child.save
+end unless Child.any?
